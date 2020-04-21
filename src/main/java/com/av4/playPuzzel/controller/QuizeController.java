@@ -19,7 +19,6 @@ public class QuizeController {
 	QuizeService quizeService;
 	
 	
-
 	@PostMapping("/create")
 	public Quize createQuize(@RequestBody Quize quize) {
 
