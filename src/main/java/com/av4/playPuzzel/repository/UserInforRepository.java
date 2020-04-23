@@ -19,4 +19,8 @@ public interface UserInforRepository extends CrudRepository<UserInfo, Long> {
 	@Query("Select u from UserInfo u where u.email = :email AND u.password = :password")
 	public UserInfo findUserByEmailAndPassword(@Param(value = "email") String email,
 			@Param(value = "password") String password);
+	
+	
+	@Query("select u from UserInfo u where u.uId=:uId")
+	public UserInfo getUserInfoById(@Param(value="uId") Long uId);
 }

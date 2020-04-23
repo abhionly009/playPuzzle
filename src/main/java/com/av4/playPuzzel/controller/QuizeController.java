@@ -32,4 +32,11 @@ public class QuizeController {
 		return quizeService.getQuize(name);
 		
 	}
+	
+	@PostMapping("/enroll")
+	public String enrollToQuize(@Param(value="quizeId")Long quizeId, @Param(value="userId")Long userId) {
+		
+		quizeService.enrollUser(quizeId, userId);
+		return "";
+	}
 }

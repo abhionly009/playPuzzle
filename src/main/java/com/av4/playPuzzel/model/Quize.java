@@ -9,8 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="QuizeDetails")
+
 public class Quize {
 	
 	@Id
@@ -20,6 +23,9 @@ public class Quize {
 	
 	@Column(nullable = false, unique = true)
 	private String name;
+	
+	@ManyToMany
+	private List<UserInfo> userInfo; 
 	
 	@ManyToMany
 	private List<Question> question;
@@ -47,5 +53,13 @@ public class Quize {
 
 	public void setQuestion(List<Question> question) {
 		this.question = question;
+	}
+
+	public List<UserInfo> getUserInfo() {
+		return userInfo;
+	}
+
+	public void setUserInfo(List<UserInfo> userInfo) {
+		this.userInfo = userInfo;
 	}
 }
