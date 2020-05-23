@@ -1,9 +1,12 @@
 package com.av4.playPuzzel.model;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Answer {
@@ -22,6 +25,11 @@ public class Answer {
 	
 	private String correctAnswer;
 
+	
+//	@ManyToMany(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "question_id")
+//	private Question question;
+	
 	public String getOptionA() {
 		return optionA;
 	}
@@ -83,6 +91,14 @@ public class Answer {
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+//	public Question getQuestion() {
+//		return question;
+//	}
+//
+//	public void setQuestion(Question question) {
+//		this.question = question;
+//	}
 	
 	
 }
