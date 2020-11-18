@@ -31,6 +31,8 @@ public class QuizeService {
 	public Quize getQuize(String name) {
 
 		Quize quizeResponse = quizeRepository.findQuizeByName(name);
+		System.out.println("Quize respose" + quizeResponse);
+
 //
 //		if (quizeResponse != null) {
 //

@@ -35,6 +35,9 @@ public class UserInfo {
 	
 	private boolean isEmailVerified;
 	
+//	@OneToMany(fetch= FetchType.LAZY, mappedBy="userInfo")
+//	private List<Task> taskList;
+	
 	
 	@OneToMany(fetch = FetchType.LAZY,mappedBy ="userInfo" )
 	private List<Quize> quizeDetails;
@@ -121,6 +124,22 @@ public class UserInfo {
 	public void setQuizeDetails(List<Quize> quizeDetails) {
 		this.quizeDetails = quizeDetails;
 	}
+
+	@Override
+	public String toString() {
+		return "UserInfo [uId=" + uId + ", name=" + name + ", email=" + email + ", mobile=" + mobile + ", password="
+				+ password + ", authToken=" + authToken + ", isMobileVerified=" + isMobileVerified
+				+ ", isEmailVerified=" + isEmailVerified + ", quizeDetails=" + quizeDetails + ", message=" + message
+				+ "]";
+	}
+
+//	public List<Task> getTaskList() {
+//		return taskList;
+//	}
+//
+//	public void setTaskList(List<Task> taskList) {
+//		this.taskList = taskList;
+//	}
 
 
 	

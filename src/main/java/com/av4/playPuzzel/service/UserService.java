@@ -1,9 +1,12 @@
 package com.av4.playPuzzel.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.av4.playPuzzel.model.UserInfo;
+import com.av4.playPuzzel.model.UserInfoWithoutSensibleInfo;
 import com.av4.playPuzzel.repository.UserInforRepository;
 
 @Service
@@ -39,6 +42,16 @@ public class UserService {
 		
 		return userInforRepository.findUserByEmailAndPassword(email,pass);
 		
+	}
+	
+	public UserInfo findUserByAuthToken(String authToken) {
+		return userInforRepository.findUserByAuthToken(authToken);
+	}
+	
+	public List<UserInfoWithoutSensibleInfo> getUserDetails(){
+		
+		
+		return  userInforRepository.findAllUsers();
 	}
 
 }
