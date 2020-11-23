@@ -2,6 +2,7 @@ package com.av4.playPuzzel.repository;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -23,6 +24,9 @@ public interface UserInforRepository extends CrudRepository<UserInfo, Long> {
 	public UserInfo findUserByEmailAndPassword(@Param(value = "email") String email,
 			@Param(value = "password") String password);
 	
+	@Modifying
+	@Query("Update UserInfo u set u.profilePic = :profilePic where u.authToken = :authToken")
+	public int updateProfile(@Param(value="profilePic") String profilePic, @Param(value="authToken") String authToken);
 	
 	@Query("select u from UserInfo u where u.uId=:uId")
 	public UserInfo getUserInfoById(@Param(value="uId") Long uId);

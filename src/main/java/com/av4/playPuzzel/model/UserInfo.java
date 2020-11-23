@@ -35,6 +35,8 @@ public class UserInfo {
 	
 	private boolean isEmailVerified;
 	
+	private String profilePic;
+	
 //	@OneToMany(fetch= FetchType.LAZY, mappedBy="userInfo")
 //	private List<Task> taskList;
 	
@@ -131,6 +133,20 @@ public class UserInfo {
 				+ password + ", authToken=" + authToken + ", isMobileVerified=" + isMobileVerified
 				+ ", isEmailVerified=" + isEmailVerified + ", quizeDetails=" + quizeDetails + ", message=" + message
 				+ "]";
+	}
+
+	@Transient
+	public String getProfilePic() {
+		if (profilePic == null || uId == null) return null;
+		
+		return "/user-photos/" + uId + "/" + profilePic;
+	}
+
+	
+	
+ 
+	public void setProfilePic(String profilePic) {
+		this.profilePic = profilePic;
 	}
 
 //	public List<Task> getTaskList() {

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.av4.playPuzzel.model.UserInfo;
 import com.av4.playPuzzel.model.UserInfoWithoutSensibleInfo;
@@ -34,8 +35,14 @@ public class UserService {
 			return false;
 	}
 	
-	public void saveUserInfo(UserInfo userInfo) {
-		userInforRepository.save(userInfo);
+	public UserInfo saveUserInfo(UserInfo userInfo) {
+		return userInforRepository.save(userInfo);
+	}
+	
+	@Transactional
+	public int updateProfilePic(String auth, String profilePic) {
+		
+		return userInforRepository.updateProfile(profilePic,auth);
 	}
 	
 	public UserInfo checkUserCredentials(String email, String pass) {

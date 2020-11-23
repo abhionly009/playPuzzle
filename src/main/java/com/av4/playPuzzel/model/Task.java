@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="task")
 public class Task {
@@ -24,6 +26,8 @@ public class Task {
 	
 	private String endTime;
 	
+	
+	@JsonIgnore
 	@OneToOne(fetch=FetchType.LAZY)
 	private UserInfo userInfo;
 
