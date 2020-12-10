@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.av4.playPuzzel.model.UserInfo;
 import com.av4.playPuzzel.model.UserInfoWithoutSensibleInfo;
@@ -41,4 +42,14 @@ public interface UserInforRepository extends CrudRepository<UserInfo, Long> {
 	@Query("select u from UserInfo u")
 	public List<UserInfoWithoutSensibleInfo> findAllUsers();
 	
+	@Modifying
+	@Transactional
+	@Query("Update UserInfo u set u.authToken = :updatedValue where u.authToken = :authToken")
+	public int logoutUser(@Param(value="authToken")String authToken, @Param(value="updatedValue") String updatedValue);
+	
+	
+	@Modifying
+	@Transactional
+	@Query("Update UserInfo u set u.authToken = :authToken where u.email = :email")
+	public int updateAuthToekn(@Param(value="authToken")String authToken, @Param(value="email") String email);
 }

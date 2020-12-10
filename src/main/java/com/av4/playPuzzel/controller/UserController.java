@@ -53,8 +53,6 @@ public class UserController {
 				userInfo.setMobile(info.getMobile());
 				userInfo.setMobileVerified(false);
 				userInfo.setEmailVerified(false);
-				
-				userInfo.setAuthToken(AuthTokenUtil.generateNewToken());
 				userInfo.setPassword(AuthTokenUtil.cryptWithMD5(info.getPassword()));
 				userService.saveUserInfo(userInfo);
 				userInfo.setMessage("User has been created successfully ");
@@ -97,13 +95,13 @@ public class UserController {
 		UserInfo userInfo = null;
 		userInfo=  userService.checkUserCredentials( loginUser.getEmailId(), AuthTokenUtil.cryptWithMD5(loginUser.getPassword()));
 			
-		System.out.println(loginUser.getEmailId());
-		System.out.println(loginUser.getPassword());
-
 		
 		if (userInfo!=null) {
 			userInfo.setMessage("User has been logged in successfully");
-			userInfo.setPassword("");	
+			String authToken = AuthTokenUtil.generateNewToken();
+			userInfo.setAuthToken(authToken);
+			userService.updateAuthToken(authToken, loginUser.getEmailId());
+			userInfo.setPassword("");
 			
 		} else {
 			userInfo = new UserInfo();
@@ -119,6 +117,31 @@ public class UserController {
 		
 		
 	}
+	
+	@PostMapping("/logout")
+	public String logoutUser(@Param(value="authToken") String authToken) {
+		
+		UserInfo userInfo =	userService.findUserByAuthToken(authToken);
+		
+		String message = "";
+		
+		if (userInfo!= null) {
+			int logoutStatus = userService.logoutUserBySettingAuthEnpty(authToken);
+			if (logoutStatus>0) {
+				message = "User logged out successfully";
+			}else {
+				message = "something went wrong please try after sometime";
+			}
+			
+		}
+		
+		return message;
+
+		
+	}
+	
+	
+	
 	
 	@GetMapping("/verifyEmail")
 	public String verifyMyMail(@Param(value="authToken")String authToken) {

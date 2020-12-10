@@ -15,9 +15,6 @@ public class Email {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "employee_id")
-	private Employee employee;
 
 	public Long getId() {
 		return id;
@@ -27,12 +24,6 @@ public class Email {
 		this.id = id;
 	}
 
-	public Employee getEmployee() {
-		return employee;
-	}
 
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
 
 }

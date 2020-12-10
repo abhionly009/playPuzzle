@@ -1,16 +1,10 @@
 package com.av4.playPuzzel.model;
 
-import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -36,13 +30,6 @@ public class UserInfo {
 	private boolean isEmailVerified;
 	
 	private String profilePic;
-	
-//	@OneToMany(fetch= FetchType.LAZY, mappedBy="userInfo")
-//	private List<Task> taskList;
-	
-	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy ="userInfo" )
-	private List<Quize> quizeDetails;
 	
 	@Transient
 	private String message;
@@ -119,19 +106,12 @@ public class UserInfo {
 		this.message = message;
 	}
 
-	public List<Quize> getQuizeDetails() {
-		return quizeDetails;
-	}
-
-	public void setQuizeDetails(List<Quize> quizeDetails) {
-		this.quizeDetails = quizeDetails;
-	}
 
 	@Override
 	public String toString() {
 		return "UserInfo [uId=" + uId + ", name=" + name + ", email=" + email + ", mobile=" + mobile + ", password="
 				+ password + ", authToken=" + authToken + ", isMobileVerified=" + isMobileVerified
-				+ ", isEmailVerified=" + isEmailVerified + ", quizeDetails=" + quizeDetails + ", message=" + message
+				+ ", isEmailVerified=" + isEmailVerified + ", message=" + message
 				+ "]";
 	}
 

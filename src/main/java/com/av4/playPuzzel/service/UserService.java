@@ -60,5 +60,13 @@ public class UserService {
 		
 		return  userInforRepository.findAllUsers();
 	}
+	
+	public int logoutUserBySettingAuthEnpty(String authToken) {
+		
+		return userInforRepository.logoutUser(authToken,"");
+	}
 
+	public int updateAuthToken(String authToken,String email) {
+		return userInforRepository.updateAuthToekn(authToken, email);
+	}
 }
