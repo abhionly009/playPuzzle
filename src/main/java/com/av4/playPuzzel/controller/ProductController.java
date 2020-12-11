@@ -18,7 +18,7 @@ import com.av4.playPuzzel.repository.CategoryRepository;
 import com.av4.playPuzzel.service.ProductService;
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/api/product")
 public class ProductController {
 	
 	@Autowired

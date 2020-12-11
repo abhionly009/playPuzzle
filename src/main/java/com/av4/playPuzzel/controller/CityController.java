@@ -13,7 +13,7 @@ import com.av4.playPuzzel.model.City;
 import com.av4.playPuzzel.service.CitySevice;
 
 @RestController
-@RequestMapping("/city")
+@RequestMapping("/api/city")
 public class CityController {
 	
 	@Autowired

@@ -18,7 +18,7 @@ import com.av4.playPuzzel.service.CartService;
 import com.av4.playPuzzel.service.UserService;
 
 @RestController
-@RequestMapping("/cart")
+@RequestMapping("/api/cart")
 public class CartController {
 
 	@Autowired

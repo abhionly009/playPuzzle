@@ -1,10 +1,13 @@
 package com.av4.playPuzzel.model;
 
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -30,6 +33,9 @@ public class UserInfo {
 	private boolean isEmailVerified;
 	
 	private String profilePic;
+	
+	@OneToMany(mappedBy = "userInfo")
+	private List<Address> address;
 	
 	@Transient
 	private String message;
@@ -129,13 +135,15 @@ public class UserInfo {
 		this.profilePic = profilePic;
 	}
 
-//	public List<Task> getTaskList() {
-//		return taskList;
-//	}
-//
-//	public void setTaskList(List<Task> taskList) {
-//		this.taskList = taskList;
-//	}
+	public List<Address> getAddress() {
+		return address;
+	}
+
+	public void setAddress(List<Address> address) {
+		this.address = address;
+	}
+
+
 
 
 	

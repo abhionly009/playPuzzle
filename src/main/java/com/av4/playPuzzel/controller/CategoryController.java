@@ -13,7 +13,7 @@ import com.av4.playPuzzel.model.Category;
 import com.av4.playPuzzel.service.CategoryService;
 
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/api/category")
 public class CategoryController {
 
 	@Autowired

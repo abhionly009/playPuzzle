@@ -26,7 +26,7 @@ import com.av4.playPuzzel.utils.AuthTokenUtil;
 import com.av4.playPuzzel.utils.FileUploadUtil;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api")
 public class UserController {
 
 	@Autowired
