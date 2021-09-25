@@ -3,6 +3,8 @@ package com.av4.playPuzzel.controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
@@ -17,10 +19,15 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.av4.playPuzzel.model.Cart;
+import com.av4.playPuzzel.model.Home;
 import com.av4.playPuzzel.model.Login;
+import com.av4.playPuzzel.model.Product;
 import com.av4.playPuzzel.model.UserInfo;
 import com.av4.playPuzzel.model.UserInfoWithoutSensibleInfo;
+import com.av4.playPuzzel.service.CartService;
 import com.av4.playPuzzel.service.EmailNotificationService;
+import com.av4.playPuzzel.service.ProductService;
 import com.av4.playPuzzel.service.UserService;
 import com.av4.playPuzzel.utils.AuthTokenUtil;
 import com.av4.playPuzzel.utils.FileUploadUtil;
@@ -31,6 +38,12 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	CartService cartService;
+	
+	@Autowired 
+	ProductService productService;
 	
 	@Autowired
 	private EmailNotificationService emaiService;
@@ -54,6 +67,8 @@ public class UserController {
 				userInfo.setMobileVerified(false);
 				userInfo.setEmailVerified(false);
 				userInfo.setPassword(AuthTokenUtil.cryptWithMD5(info.getPassword()));
+				userInfo.setRole(info.getRole());
+
 				userService.saveUserInfo(userInfo);
 				userInfo.setMessage("User has been created successfully ");
 				userInfo.setAuthToken(null);
@@ -90,10 +105,20 @@ public class UserController {
 	}
 	
 	@PostMapping("/login")
-	public UserInfo loginUser(@RequestBody Login loginUser) {
+	public Home loginUser(@RequestBody Login loginUser, HttpServletRequest httpServletRequest) {
 		
+		System.out.println("REQUESTER IP ADDRESS " + httpServletRequest.getRequestURI());
+		
+		System.out.println("REQUESTER IP ADDRESS " + httpServletRequest.getRemoteAddr());
+		
+		System.out.println(loginUser.getEmailId());
+		System.out.println(loginUser.getPassword());
+
+		
+		Home homePage = new Home();
 		UserInfo userInfo = null;
 		userInfo=  userService.checkUserCredentials( loginUser.getEmailId(), AuthTokenUtil.cryptWithMD5(loginUser.getPassword()));
+		
 			
 		
 		if (userInfo!=null) {
@@ -102,18 +127,22 @@ public class UserController {
 			userInfo.setAuthToken(authToken);
 			userService.updateAuthToken(authToken, loginUser.getEmailId());
 			userInfo.setPassword("");
+			List<Product> cartList = cartService.getAllProduct(userInfo);
+			homePage.setCart(cartList);
+			homePage.setProductList(productService.getAllProduct());
 			
 		} else {
 			userInfo = new UserInfo();
 			userInfo.setMessage("User not found");
 			userInfo.setPassword("");
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST," found with your credentials");
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"  No User found with your credentials");
 
 		}
 		
-		System.out.println(userInfo.toString());
 		
-		return userInfo;
+		homePage.setUserInfo(userInfo);
+
+		return homePage;
 		
 		
 	}

@@ -69,4 +69,9 @@ public class UserService {
 	public int updateAuthToken(String authToken,String email) {
 		return userInforRepository.updateAuthToekn(authToken, email);
 	}
+
+	public long getAllUser() {
+		return userInforRepository.count();
+	}
+	
 }

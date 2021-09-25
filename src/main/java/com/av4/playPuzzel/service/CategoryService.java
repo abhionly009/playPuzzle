@@ -22,4 +22,7 @@ public class CategoryService {
 		return categoryRepo.findAll();
 	}
 	
+	public long getCategoryCount() {
+		return categoryRepo.count();
+	}
 }

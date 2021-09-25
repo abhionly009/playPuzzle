@@ -1,5 +1,6 @@
 package com.av4.playPuzzel.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,8 +39,9 @@ public class ProductController {
 		alteredProduct.setDescription(product.getDescription());
 		alteredProduct.setDiscount(product.getDiscount());
 		alteredProduct.setPrice(product.getPrice());
+		alteredProduct.setBrand(product.getBrand());
 		alteredProduct.setCategory(category);
-		
+		alteredProduct.setImageUrl(product.getImageUrl());
 		System.err.println(alteredProduct);
 		
 		return productService.saveProduct(alteredProduct);
@@ -48,11 +50,14 @@ public class ProductController {
 	@GetMapping("/allProduct")
 	public List<Product> getAllProduct(){
 		
-		return productService.getAllProduct();
+		ArrayList<Product> products =  (ArrayList<Product>) productService.getAllProduct();
+		return products;
+		
 	}
 	
 	@GetMapping("/productByCategory")
-	public List<Product> getProductByCategory(@Param(value = "cId") long cId){
+	public List<Product> getProductByCategory(@Param(value = "cId") Long cId){
+		System.out.println(cId);
 		
 		return productService.getProductByCategory(cId);
 		

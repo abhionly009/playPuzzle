@@ -1,5 +1,6 @@
 package com.av4.playPuzzel.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -17,14 +18,19 @@ public class Product {
 	@Id
 	private Long pId;
 	
+	private String brand;
+	
 	private String  name ;
 	
+	@Column(columnDefinition="TEXT")
 	private String description;
 	
 	private Long price;
 	
 	private Long discount;
 
+	private String imageUrl; 
+	
 //	@JsonIgnore()
 	
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler","description","code"})
@@ -84,6 +90,22 @@ public class Product {
 	public String toString() {
 		return "Product [pId=" + pId + ", name=" + name + ", description=" + description + ", price=" + price
 				+ ", discount=" + discount + ", category=" + category + "]";
+	}
+
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 	
 	

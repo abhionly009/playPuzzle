@@ -7,4 +7,5 @@ public interface UserInfoWithoutSensibleInfo {
 	boolean isEmailVerified();
 	boolean isMobileVerified();
 	String getEmail();
+	String getRole();
 }

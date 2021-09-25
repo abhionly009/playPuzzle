@@ -16,7 +16,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class WebConfigClass implements  WebMvcConfigurer  {
 	@Override
     public void addCorsMappings(CorsRegistry registry) {
-//        registry.addMapping("/**");
+        registry.addMapping("/**");
         registry.addMapping("/api");
     }
 

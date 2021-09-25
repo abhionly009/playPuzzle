@@ -12,6 +12,6 @@ import com.av4.playPuzzel.model.Product;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-	@Query("select p from Product p where p.category=:category")
+	@Query("select p from Product p where p.category.id=:category")
 	public List<Product> getProductByCategoryId(@Param(value="category") Long category);
 }

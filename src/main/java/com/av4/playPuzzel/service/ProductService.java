@@ -22,8 +22,12 @@ public class ProductService {
 		return productRepo.findAll();
 	}
 
-	public List<Product> getProductByCategory(long category){
+	public List<Product> getProductByCategory(Long category){
 		
 		return productRepo.getProductByCategoryId( category);
+	}
+	
+	public long findCount() {
+		return productRepo.count();
 	}
 }

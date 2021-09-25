@@ -19,6 +19,8 @@ public class Category {
 	private String description;
 	
 	private Long code;
+	
+	private String url;
 
 	public Long getId() {
 		return id;
@@ -55,6 +57,14 @@ public class Category {
 	@Override
 	public String toString() {
 		return "Category [id=" + id + ", name=" + name + ", description=" + description + ", code=" + code + "]";
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 }
