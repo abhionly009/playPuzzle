@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.av4.playPuzzel.model.InitialInfo;
 import com.av4.playPuzzel.service.CategoryService;
+import com.av4.playPuzzel.service.CitySevice;
 import com.av4.playPuzzel.service.ProductService;
 import com.av4.playPuzzel.service.UserService;
 
@@ -28,6 +29,9 @@ public class HomeController  {
 	@Autowired
 	UserService userService;
 	
+	@Autowired
+	CitySevice cityService;
+	
 	
 
 	@GetMapping("/data")
@@ -36,7 +40,7 @@ public class HomeController  {
 		InitialInfo info = null;
 		List<InitialInfo> list = new ArrayList<InitialInfo>();
 		
-		 info = new InitialInfo("user",userService.getAllUser());
+		info = new InitialInfo("user",userService.getAllUser());
 		list.add(info);
 		
 		info = new InitialInfo("product", proService.findCount());
@@ -45,6 +49,8 @@ public class HomeController  {
 		
 		list.add(info);
 		
+		info = new InitialInfo ("city",cityService.cityCount() );
+		list.add(info);
 
 			
 		return list;

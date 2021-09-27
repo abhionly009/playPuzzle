@@ -23,4 +23,8 @@ public class CitySevice {
 	public City saveCity(City city) {
 		return cityRepo.save(city);
 	}
+	
+	public long cityCount() {
+		return cityRepo.count();
+	}
 }
