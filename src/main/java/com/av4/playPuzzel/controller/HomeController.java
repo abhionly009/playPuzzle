@@ -35,6 +35,7 @@ public class HomeController  {
 	
 
 	@GetMapping("/data")
+	
 	public List<InitialInfo> getHomeData() {
 		
 		InitialInfo info = null;

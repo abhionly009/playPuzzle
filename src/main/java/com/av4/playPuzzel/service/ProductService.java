@@ -30,4 +30,8 @@ public class ProductService {
 	public long findCount() {
 		return productRepo.count();
 	}
+	
+	public Product getProductById(Long id) {
+		return productRepo.getProductById(id);
+	}
 }
