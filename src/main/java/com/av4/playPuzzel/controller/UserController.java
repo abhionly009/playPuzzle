@@ -152,7 +152,10 @@ public class UserController {
 		
 		UserInfo userInfo =	userService.findUserByAuthToken(authToken);
 		
-		String message = "";
+		System.out.println("auth Token  "+ authToken);
+		System.out.println("User Info " + userInfo);
+		
+		String message = "There is not user found with provided credentials";
 		
 		if (userInfo!= null) {
 			int logoutStatus = userService.logoutUserBySettingAuthEnpty(authToken);
